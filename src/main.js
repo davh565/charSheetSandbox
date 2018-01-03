@@ -6,9 +6,33 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
 
 import App from './App'
+import Navbar from './components/Navbar.vue'
+import StatTable from './components/StatTable.vue'
+import SavesTable from './components/SavesTable.vue'
+import DefensesTable from './components/DefensesTable.vue'
+import CombatTable from './components/CombatTable.vue'
+import ManeuversTable from './components/ManeuversTable.vue'
+import SkillTable from './components/SkillTable.vue'
 import router from './router'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, { theme: {
+  primary: '#039BE5',
+  secondary: '#4DD0E1',
+  accent: '#B2EBF2',
+  error: '#BF360C',
+  warning: '#FFA000',
+  info: '#81D4FA',
+  success: '#2E7D32',
+}})
+import colors from 'vuetify/src/util/colors'
+
+Vue.component('navbar',Navbar)
+Vue.component('stat-table',StatTable)
+Vue.component('saves-table',SavesTable)
+Vue.component('defenses-table',DefensesTable)
+Vue.component('combat-table',CombatTable)
+Vue.component('maneuvers-table',ManeuversTable)
+Vue.component('skill-table',SkillTable)
 
 Vue.config.productionTip = false
 
