@@ -13,6 +13,7 @@ import DefensesTable from './components/DefensesTable.vue'
 import CombatTable from './components/CombatTable.vue'
 import ManeuversTable from './components/ManeuversTable.vue'
 import SkillTable from './components/SkillTable.vue'
+import StatsPage from './components/StatsPage.vue'
 import router from './router'
 
 Vue.use(Vuetify, { theme: {
@@ -28,6 +29,7 @@ import colors from 'vuetify/src/util/colors'
 
 Vue.component('navbar',Navbar)
 Vue.component('stat-table',StatTable)
+Vue.component('stats-page',StatsPage)
 Vue.component('saves-table',SavesTable)
 Vue.component('defenses-table',DefensesTable)
 Vue.component('combat-table',CombatTable)

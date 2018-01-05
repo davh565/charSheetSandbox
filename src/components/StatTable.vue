@@ -17,7 +17,7 @@
       <template slot="items" slot-scope="props">
         <td :class="themecolor"
             class="lighten-2 body-2 white--text">
-            <v-avatar tile size="2em">
+            <v-avatar tile size="40%">
                 <img :src="props.item.avatar" />
             </v-avatar>
             {{ props.item.name }}

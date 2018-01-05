@@ -1,15 +1,15 @@
 <template>
-    <v-toolbar dark :class="themecolor" extended fixed>
-        <v-progress-circular
-      v-bind:size="56"
-      v-bind:width="8"
-      v-bind:rotate="360"
-      v-bind:value="value"
-      color="red"
-    >
+    <v-toolbar app dark :class="themecolor" extended fixed>
+      <v-progress-circular
+        v-bind:size="56"
+        v-bind:width="8"
+        v-bind:rotate="360"
+        v-bind:value="value"
+        color="red"
+      >
       <v-avatar size="48px">
         <img src="/static/avatar.png" />
-    </v-avatar>
+      </v-avatar>
     </v-progress-circular>
 
     
@@ -64,6 +64,29 @@
       <v-btn icon>
       <v-icon>expand_more</v-icon>
     </v-btn>
+    <v-tabs fixed centered>
+    <v-tabs-bar class="cyan" dark>
+      <v-tabs-slider class="yellow"></v-tabs-slider>
+      <v-tabs-item
+        v-for="i in items"
+        :key="i"
+        :href="'#tab-' + i"
+      >
+        {{ i }}
+      </v-tabs-item>
+    </v-tabs-bar>
+    <v-tabs-items>
+      <v-tabs-content
+        v-for="i in items"
+        :key="i"
+        :id="'tab-' + i"
+      >
+        <v-card flat>
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tabs-content>
+    </v-tabs-items>
+  </v-tabs>
     </v-toolbar-item>
   </v-toolbar>
 </template>
