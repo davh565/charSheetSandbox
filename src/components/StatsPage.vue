@@ -17,9 +17,6 @@
         <v-flex sm6>
             <maneuvers-table />
         </v-flex>
-        <v-flex sm12>
-            <skill-table />
-        </v-flex>
         </v-layout>
     </v-container>
 </template>
