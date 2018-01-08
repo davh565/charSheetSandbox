@@ -1,11 +1,11 @@
 <template>
   <v-toolbar app :color="themecolor" dark tabs>
 
-    <v-toolbar-side-icon></v-toolbar-side-icon>
+    <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
 
       <v-progress-circular
-      v-bind:size="56"
-      v-bind:width="8"
+      v-bind:size="60"
+      v-bind:width="16"
       v-bind:rotate="360"
       v-bind:value="value"
       color="red">
@@ -15,26 +15,35 @@
       </v-progress-circular>
 
 
+    <v-flex xs3>
     <v-toolbar-title class="white--text display-1">
       <v-text-field
       class="display-1"
-      name="name"
+      name="charName"
       label="Character Name"
       id="charName"
       color="white" />
     </v-toolbar-title>
-    <v-flex xs2>
+    </v-flex>
+    <v-flex xs1>
       <v-text-field
       name="level"
       label="Level"
       id="level"
       color="white" />
     </v-flex>
-    <v-flex xs4>
+    <v-flex xs2>
       <v-text-field
-      name="input-1"
+      name="class"
       label="Class"
-      id="testing"
+      id="class"
+      color="white" />
+    </v-flex>
+    <v-flex xs2>
+      <v-text-field
+      name="playerName"
+      label="Player Name"
+      id="playerName"
       color="white" />
     </v-flex>
 
@@ -154,6 +163,7 @@
 </script>
 
 <style scoped>
+
 
 </style>
 

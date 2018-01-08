@@ -3,7 +3,7 @@
  <div>
      <navbar :themecolor="themecolor" v-on:changeTheme="changeTheme($event)"/>
 <v-container fluid id="content">
-  <transition name='fade'>
+  <transition name="fade">
       <router-view :themecolor="themecolor"
         transition="slide-x-transition" />
     </transition>
@@ -37,6 +37,20 @@
 	background: rgba(0, 0, 0, .1);;
 	color:white;
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .5s;
+}
+
+.fade-enter-active {
+  transition-delay: .25s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+
 #inputcell {
   padding: 0%;
 }
