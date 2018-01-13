@@ -2,19 +2,19 @@
 <template>
     <v-container fluid grid-list-md>
         <v-layout row wrap>
-        <v-flex sm6>
+        <v-flex xs12>
             <stat-table :themecolor="themecolor" />
         </v-flex>
-        <v-flex sm6>
+        <v-flex xs12>
             <saves-table />
         </v-flex>
-        <v-flex sm12>
+        <v-flex xs12>
             <defenses-table />
         </v-flex>
-        <v-flex sm6>
+        <v-flex xs12>
             <combat-table />
         </v-flex>
-        <v-flex sm6>
+        <v-flex xs12>
             <maneuvers-table />
         </v-flex>
         </v-layout>

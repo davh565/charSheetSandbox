@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 
+import VueSimpleSVG from 'vue-simple-svg'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
 
@@ -15,7 +16,12 @@ import ManeuversTable from './components/ManeuversTable.vue'
 import SkillTable from './components/SkillTable.vue'
 import StatsPage from './components/StatsPage.vue'
 import router from './router'
+import lodash from 'lodash'
+import VueLodash from 'vue-lodash'
 
+Vue.use(VueLodash, lodash)
+
+Vue.use(VueSimpleSVG)
 Vue.use(Vuetify, { theme: {
   primary: '#039BE5',
   secondary: '#4DD0E1',
@@ -25,7 +31,6 @@ Vue.use(Vuetify, { theme: {
   info: '#81D4FA',
   success: '#2E7D32',
 }})
-import colors from 'vuetify/src/util/colors'
 
 Vue.component('navbar',Navbar)
 Vue.component('stat-table',StatTable)

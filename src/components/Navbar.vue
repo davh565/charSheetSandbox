@@ -1,18 +1,25 @@
 <template>
-  <v-toolbar app :color="themecolor" dark tabs>
-
+  <v-toolbar
+  app
+  :color="themecolor" 
+  dark 
+  extended
+  >
+  <v-toolbar-items>
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-
       <v-progress-circular
-      v-bind:size="60"
-      v-bind:width="16"
-      v-bind:rotate="360"
+      class="mt-2"
+      v-bind:size="82"
+      :width="12"
+      v-bind:rotate="-270"
       v-bind:value="value"
-      color="red">
-        <v-avatar size="48px">
+      color="green">
+
+        <v-avatar size="64px">
           <img src="/static/avatar.png" />
         </v-avatar>
       </v-progress-circular>
+      </v-toolbar-items>
 
 
     <v-flex xs3>
@@ -22,7 +29,8 @@
       name="charName"
       label="Character Name"
       id="charName"
-      color="white" />
+      color="white"
+      hide-details />
     </v-toolbar-title>
     </v-flex>
     <v-flex xs1>
@@ -30,24 +38,25 @@
       name="level"
       label="Level"
       id="level"
-      color="white" />
+      color="white" 
+      hide-details />
     </v-flex>
     <v-flex xs2>
       <v-text-field
       name="class"
       label="Class"
       id="class"
-      color="white" />
+      color="white"
+      hide-details />
     </v-flex>
     <v-flex xs2>
       <v-text-field
       name="playerName"
       label="Player Name"
       id="playerName"
-      color="white" />
+      color="white"
+      hide-details />
     </v-flex>
-
-    <v-spacer />
 
     <v-btn icon>
       <v-icon>search</v-icon>
@@ -61,7 +70,6 @@
           <v-list-tile-title>
             <v-avatar size="20px" :color="color">
             </v-avatar>
-            <!-- {{color}} -->
           </v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -70,11 +78,15 @@
       <v-icon>more_vert</v-icon>
     </v-btn>
 
+
+
+
     <v-tabs
     :color="themecolor"
     slot="extension"
     v-model="tab"
-    align-with-title>
+    align-with-title
+    >
       <v-tabs-slider color="white" />
       <v-tab
       :to="item.route"
@@ -87,9 +99,10 @@
         </v-avatar> 
         {{ item.name }}
       </v-tab>
-    </v-tabs>
+    </v-tabs> 
   </v-toolbar>
 </template>
+
 
 <script>
   export default {
