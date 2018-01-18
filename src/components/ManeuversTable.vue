@@ -8,13 +8,16 @@
       >
       <template slot="headers" slot-scope="props">
         <th v-for="header in props.headers" 
-            :key="header.text" 
-            class="blue white--text">
+            :key="header.text"
+            :class="themecolor"
+            class="white--text">
           {{header.text}}
         </th>
       </template>
       <template slot="items" slot-scope="props">
-        <td class="blue lighten-2 white--text text-xs-left">
+        <td
+        :class="themecolor"
+        class="lighten-2 white--text text-xs-left">
             <v-avatar tile size="40%">
                 <img :src="props.item.avatar" />
             </v-avatar>
@@ -30,6 +33,7 @@
 
 <script>
   export default {
+    props: ['themecolor'],
     data () {
       return {
         headers: [

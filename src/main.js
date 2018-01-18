@@ -8,6 +8,7 @@ import 'vuetify/dist/vuetify.css'
 
 import App from './App'
 import Navbar from './components/Navbar.vue'
+import Drawer from './components/Drawer.vue'
 import StatTable from './components/StatTable.vue'
 import SavesTable from './components/SavesTable.vue'
 import DefensesTable from './components/DefensesTable.vue'
@@ -18,6 +19,7 @@ import StatsPage from './components/StatsPage.vue'
 import router from './router'
 import lodash from 'lodash'
 import VueLodash from 'vue-lodash'
+
 
 Vue.use(VueLodash, lodash)
 
@@ -33,6 +35,7 @@ Vue.use(Vuetify, { theme: {
 }})
 
 Vue.component('navbar',Navbar)
+Vue.component('drawer',Drawer)
 Vue.component('stat-table',StatTable)
 Vue.component('stats-page',StatsPage)
 Vue.component('saves-table',SavesTable)

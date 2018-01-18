@@ -1,170 +1,296 @@
 <template>
   <v-toolbar
-  app
-  :color="themecolor" 
-  dark 
-  extended
-  >
-  <v-toolbar-items>
-    <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-      <v-progress-circular
-      class="mt-2"
-      v-bind:size="82"
-      :width="12"
-      v-bind:rotate="-270"
-      v-bind:value="value"
-      color="green">
-
-        <v-avatar size="64px">
-          <img src="/static/avatar.png" />
-        </v-avatar>
-      </v-progress-circular>
-      </v-toolbar-items>
-
-
-    <v-flex xs3>
-    <v-toolbar-title class="white--text display-1">
-      <v-text-field
-      class="display-1"
-      name="charName"
-      label="Character Name"
-      id="charName"
-      color="white"
-      hide-details />
-    </v-toolbar-title>
-    </v-flex>
-    <v-flex xs1>
-      <v-text-field
-      name="level"
-      label="Level"
-      id="level"
-      color="white" 
-      hide-details />
-    </v-flex>
-    <v-flex xs2>
-      <v-text-field
-      name="class"
-      label="Class"
-      id="class"
-      color="white"
-      hide-details />
-    </v-flex>
-    <v-flex xs2>
-      <v-text-field
-      name="playerName"
-      label="Player Name"
-      id="playerName"
-      color="white"
-      hide-details />
-    </v-flex>
-
-    <v-btn icon>
-      <v-icon>search</v-icon>
-    </v-btn>
-    <v-menu offset-y>
-      <v-btn icon slot="activator">
-        <v-icon>color_lens</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile v-for="color in colors" :key="color" @click="changeTheme(color)">
-          <v-list-tile-title>
-            <v-avatar size="20px" :color="color">
-            </v-avatar>
-          </v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-      <v-btn icon>
-      <v-icon>more_vert</v-icon>
-    </v-btn>
-
-
-
-
-    <v-tabs
     :color="themecolor"
-    slot="extension"
-    v-model="tab"
-    align-with-title
-    >
-      <v-tabs-slider color="white" />
-      <v-tab
-      :to="item.route"
-      router
-      v-for="(item, i) in items"
-      :key="i"
-      :href="'#tab-' + (i + 1)" >
-        <v-avatar tile size="40%">
-          <img :src="item.avatar" />
-        </v-avatar> 
-        {{ item.name }}
-      </v-tab>
-    </v-tabs> 
-  </v-toolbar>
+    dark
+    prominent
+    fixed
+    clipped-left
+    app
+    extended>
+      <v-toolbar-side-icon @click.stop="toggleDrawer"></v-toolbar-side-icon>
+      <v-container  fill-height class="pa-0" grid-list-md fluid v-bind="{ [`grid-list-sm`]: true }">
+        <v-layout mr-2 mt-3>
+          <v-avatar size="92px">
+              <img src="/static/avatar.png" />
+            </v-avatar>
+        </v-layout>    
+        <v-layout v-resize="onResize" row wrap justify-space-between>
+          <v-flex sm9 md3>
+              <v-text-field
+              class="display-1 text--lighten-4"
+              name="charName"
+              label="Character Name"
+              id="charName"
+              :color="themecolor"
+              :value="characterData[0].characterName"
+              hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>600" sm3 md2>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="alignment"
+            label="Alignment"
+            id="alignment"
+            :value="characterData[0].alignment"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>960" md2 lg1>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="deity"
+            label="Deity"
+            id="deity"
+            :value="characterData[0].deity"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>960" md2>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="homeland"
+            label="Homeland"
+            id="homeland"
+            :value="characterData[0].homeland"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>960" md2 lg1>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="gender"
+            label="Gender"
+            id="gender"
+            :value="characterData[0].gender"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>960" md1>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="age"
+            label="Age"
+            id="age"
+            :value="characterData[0].age"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>1264" xs1>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="Hair"
+            label="Hair"
+            id="hair"
+            :value="characterData[0].hair"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>1264" xs1>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="eyes"
+            label="Eyes"
+            id="eyes"
+            :value="characterData[0].eyes"
+            hide-details />
+          </v-flex>
+          <v-flex xs2 md1 >
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="level"
+            label="Level"
+            id="level"
+            :value="characterData[0].level"
+            hide-details />
+          </v-flex>
+          <v-flex xs5 md3 lg2 >
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="race"
+            label="Race"
+            id="race"
+            :value="characterData[0].race"
+            hide-details />
+          </v-flex>
+          <v-flex xs5 md3 lg2>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="class"
+            label="Class"
+            id="class"
+            :value="characterData[0].class"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>960" md3 lg2 >
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="playerName"
+            label="Player Name"
+            id="playerName"
+            :value="characterData[0].playerName"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>960" md1 >
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="size"
+            label="Size"
+            id="size"
+            :value="characterData[0].size"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>1264" xs1 >
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="height"
+            label="Height"
+            id="height"
+            :value="characterData[0].height"
+            hide-details />
+          </v-flex>
+          <v-flex v-if="windowSize.x>1264" xs1>
+            <v-text-field
+            class="text--lighten-4"
+            :color="themecolor"
+            name="weight"
+            label="Weight"
+            id="weight"
+            :value="characterData[0].weight"
+            hide-details />
+          </v-flex>
+        </v-layout>
+    <v-flex xs1 slot="extension" class="hidden-lg-and-up text-xs-right">
+      <v-btn icon slot>
+      <v-icon>expand_more</v-icon>
+    </v-btn>
+    </v-flex>
+      </v-container>
+    
+
+    </v-toolbar>
 </template>
 
 
 <script>
+import colorSet from 'vuetify/es5/util/colors'
+import db from './firebaseInit'
+
   export default {
     props: ['themecolor'],
     data () {
       return {
+        characterData: [],
+        windowSize: {
+          x: 0,
+          y: 0
+        },
+        colorSet: colorSet,
+        drawer: null,
         interval: {},
+        dark: true,
         value: 0,
-        color: 'red',
         colors: ['red', 'pink', 'purple',
                   'deep-purple', 'indigo', 'blue-grey',
                   'blue','light-blue','cyan',
                   'teal', 'green', 'light-green',
                   'lime','yellow','amber','orange',
                   'deep-orange', 'brown'],
-        active: null,
-        tab: null,
         items: [
-          {
-            name: 'Stats',
-            route: 'stats',
-            avatar: '/static/icons/stats.svg',
-          },
-          {
-            name: 'Skills',
-            route: 'skills',
-            avatar: '/static/icons/skills.svg',
+              {
+                name: 'Stats',
+                route: 'stats',
+                avatar: '/static/icons/stats.svg',
+              },
+              {
+                name: 'Skills',
+                route: 'skills',
+                avatar: '/static/icons/skills.svg',
 
-          },
-          {
-            name: 'Abilities',
-            route: 'abilites',
-            avatar: '/static/icons/abilities.svg',
-          },
-          {
-            name: 'Items',
-            route: 'items',
-            avatar: '/static/icons/items.svg',
-          },
-          {
-            name: 'Spells',
-            route: 'spells',
-            avatar: '/static/icons/spells.svg',
-          },
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        interval: {},
-        value: 0
+              },
+              {
+                name: 'Abilities',
+                route: 'abilites',
+                avatar: '/static/icons/abilities.svg',
+              },
+              {
+                name: 'Items',
+                route: 'items',
+                avatar: '/static/icons/items.svg',
+              },
+              {
+                name: 'Spells',
+                route: 'spells',
+                avatar: '/static/icons/spells.svg',
+              },
+        ]
+        
       }
     },
-    methods: {
-    changeTheme (color){
-      this.$emit('changeTheme',color)
+    created () {
+      db.collection('characters').get().then
+      (querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const data = {
+            'firebaseId': doc.id,
+            'age': doc.data().age,
+            'alignment': doc.data().alignment,
+            'characterId': doc.data().characterId,
+            'characterName': doc.data().characterName,
+            'class': doc.data().class,
+            'deity': doc.data().deity,
+            'eyes': doc.data().eyes,
+            'gender': doc.data().gender,
+            'hair': doc.data().hair,
+            'height': doc.data().height,
+            'homeland': doc.data().homeland,
+            'level': doc.data().level,
+            'playerName': doc.data().playerName,
+            'race': doc.data().race,
+            'size': doc.data().size,
+            'weight': doc.data().weight,
+          }
+          this.characterData.push(data)
+        })
+      })
     },
-      next () {
-        this.active = this.tabs[(this.tabs.indexOf(this.active) + 1) % this.tabs.length]
+    computed: {
+      textColorLight: function(){
+        return this.themecolor+"--text text--lighten-4"
+      },
+      textColorDark: function(){
+        return this.themecolor+"--text text--darken-4"
+      },
+      svgColor: function(){
+        return eval('this.colorSet.'+this.camelCase+".darken4")
+      },
+      camelCase: function() {
+            return this._.camelCase(this.themecolor)
+        }
+    },
+    methods: {
+      toggleDrawer() {
+        // console.log(this.characterData[0].firebaseId)
+         this.$emit('toggleDrawer')
+      },
+      changeTheme: function(color) {
+        this.themecolor = color;
+      },
+       onResize () {
+        this.windowSize = { x: window.innerWidth, y: window.innerHeight }
       }
     },
     beforeDestroy () {
       clearInterval(this.interval)
     },
     mounted () {
+      this.onResize(),
       this.interval = setInterval(() => {
         if (this.value === 0) {
           return (this.value = 100)

@@ -9,19 +9,27 @@
       <template slot="headers" slot-scope="props">
         <th v-for="header in props.headers" 
             :key="header.text"
-            :class='themecolor'
-            class="px-1 body-2 white--text">
+            :class="[themecolor, textColorLight]"
+            class="px-1 subheading">
           <span v-html="header.text"></span>
         </th>
       </template>
       <template slot="items" slot-scope="props">
         <td
-        :class="themecolor"
-        class="px-3 body-2 lighten-2 white--text text-xs-center text-sm-left">
+        :class="themecolor, textColorLight"
+        class="px-3 body-2 darken-3 text-xs-center text-sm-left">
             <v-tooltip bottom class="hidden-sm-and-up">
               <span slot="activator">
-                <v-avatar tile size="32px">
-                    <svg :src="props.item.avatar"  class="blue" />
+                <v-avatar tile class="px-2">
+                  <simple-svg
+                  :filepath="props.item.avatar"
+                  :fill="svgColorLight"
+                  :stroke="svgColorLight"
+                  :width="'32px'"
+                  :height="'32px'"
+                  :id="'custom-id'"
+                  @ready=""
+                  />
                 </v-avatar>
               </span>
                 <span>{{ props.item.name }}</span>
@@ -29,47 +37,57 @@
               <span class="hidden-xs-only">
                 <v-avatar tile class="px-2">
                   <simple-svg
-                  
                   :filepath="props.item.avatar"
-                  :fill="svgColor"
-                  :stroke="svgColor"
+                  :fill="svgColorLight"
+                  :stroke="svgColorLight"
                   :width="'32px'"
                   :height="'32px'"
                   :id="'custom-id'"
                   @ready=""
                   />
                 </v-avatar>
-                <span class="px-2">{{ props.item.name }}</span>
+                <span :class="textColorLight" class="px-2">{{ props.item.name }}</span>
               </span>
         </td>
         <td 
-        :class="themecolor"
-        class="px-0 darken-2 title white--text text-xs-center">
+        :class="[themecolor, textColorLight]"
+        class="px-0 darken-1 title text-xs-center">
         {{ props.item.total }}
         </td>
-        <td class="px-0 text-xs-center"><input size="2" v-bind:value="props.item.statBonus" /> </td>
-        <td class="px-0 text-xs-center"><input size="2" v-bind:value="props.item.rank" /> </td>
-        <td class="px-0 text-xs-center">{{ props.item.classBonus }}</td>
-        <td class="px-0 text-xs-center">{{ props.item.classSkill }}</td>
-        <td class="px-0 text-xs-center">{{ props.item.misc }}</td>
-        <td class="px-0 text-xs-center"><input size="2" v-bind:value="props.item.statType" /> </td>
+        <td class="px-0 body-2 darken-3 text-xs-center" :class="[themecolor, textColorLight]"><input size="2" v-bind:value="props.item.statBonus" /> </td>
+        <td class="px-0 body-2 darken-3 text-xs-center" :class="[themecolor, textColorLight]"><input size="2" v-bind:value="props.item.rank" /> </td>
+        <td class="px-0 body-2 darken-3 text-xs-center" :class="[themecolor, textColorLight]">{{ props.item.classBonus }}</td>
+        <td class="px-0 body-2 darken-3 text-xs-center" :class="[themecolor, textColorLight]">{{ props.item.classSkill }}</td>
+        <td class="px-0 body-2 darken-3 text-xs-center" :class="[themecolor, textColorLight]">{{ props.item.misc }}</td>
+        <td class="px-0 body-2 darken-3 text-xs-center" :class="[themecolor, textColorLight]"><input size="2" v-bind:value="props.item.statType" /> </td>
       </template>
     </v-data-table>
 </template>
 
 <script>
-import colors from 'vuetify/es5/util/colors'
+import colorSet from 'vuetify/es5/util/colors'
   export default {
     props: ['themecolor'],
     computed: {
-        svgColor: function() {
-          // console.log(themecolor)
+      textColorLight: function(){
+        return this.themecolor+"--text text--lighten-4"
+      },
+      textColorDark: function(){
+        return this.themecolor+"--text text--darken-4"
+      },
+      svgColorLight: function(){
+        return eval('this.colorSet.'+this.camelCase+".lighten4")
+      },
+      svgColorDark: function(){
+        return eval('this.colorSet.'+this.camelCase+".darken4")
+      },
+      camelCase: function() {
             return this._.camelCase(this.themecolor)
         }
     },
     data () {
       return {
-        colors: colors,
+        colorSet: colorSet,
         headers: [
           {
             text: 'Skills',
@@ -527,7 +545,4 @@ import colors from 'vuetify/es5/util/colors'
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-td, th{
-  font-variant: small-caps;
-}
 </style>
