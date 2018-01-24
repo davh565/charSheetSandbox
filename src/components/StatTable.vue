@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import theme from '../mixins/theme'
   export default {
     props: ['themecolor'],
     data () {
@@ -123,7 +124,8 @@
       themeText: function() {
         return this.themecolor+'--text'
       }
-    }
+    },
+    mixins:[theme]
   }
 </script>
 

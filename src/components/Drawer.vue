@@ -1,109 +1,103 @@
 <template>
-<v-navigation-drawer
-      fixed
-      clipped
-      dark
-      v-model="drawer"
-      app
-      permanant
-      mini-variant
-      :class="themecolor"
-      class="darken-3"
-    
-      
+  <v-navigation-drawer
+    :class="[themecolor, shade5]"
+    app
+    clipped
+    fixed
+    :light="!dark"
+    mini-variant
+    permanent
+    v-model="drawerState"
+  >
+  <v-list dense>
+    <v-list-tile
+    :key="item.name"
+    :to="item.route"
+    v-for="item in items"
+    router
     >
-    <!-- <v-toolbar flat height='64px' :class="themecolor" class="darken-1 transparent">
-      <v-list class="pa-0">
-        <v-list-tile avatar>
-          <v-list-tile-avatar>
-          <img src="/static/avatar.png" />
-          </v-list-tile-avatar>
+      <v-list-tile-action>
+        <v-tooltip bottom>
+          <v-avatar tile size="40%" slot="activator">
+            <simple-svg
+            :filepath="item.avatar"
+            :fill="svgShade"
+            :height="'32px'"
+            :id="'custom-id'"
+            :stroke="svgShade"
+            :width="'32px'"
+            @ready=""
+            />
+          </v-avatar>
+          <span>{{item.name}}</span> 
+        </v-tooltip>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title
+        :class="[themecolor+'--text',shade4Text]"
+        
+        >
+          {{ item.name }}
+        </v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+  </v-list>
 
+  <v-list dense>
+      <v-list-group
+      prepend-icon="palette"
+      >
+        <v-list-tile  slot="activator">
           <v-list-tile-content>
-            <v-list-tile-title>CHARNAME</v-list-tile-title>
+            <v-list-tile-title :class="[themecolor+'--text',shade4Text]">Theme</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-      </v-list>
-    </v-toolbar> -->
-      <v-list dense>
-        <v-list-tile v-for="item in items" :key="item.name" :to="item.route"
-      router>
+        <v-list-tile @click="toggleDark()">
           <v-list-tile-action>
-            <v-avatar tile size="40%">
-          <simple-svg
-                  
-                  :filepath="item.avatar"
-                  :fill="svgColorLight"
-                  :stroke="svgColorLight"
-                  :width="'32px'"
-                  :height="'32px'"
-                  :id="'custom-id'"
-                  @ready=""
-                  />
-        </v-avatar> 
-
+            <v-avatar v-if="dark" size="20px" color="white" />
+            <v-avatar v-else size="20px" color="black" />
           </v-list-tile-action>
-           <v-list-tile-content>
-          <v-list-tile-title :class="textColorLight">{{ item.name }}</v-list-tile-title>
-        </v-list-tile-content>
+          <v-list-tile-title
+          :class="[themecolor+'--text',shade3Text]"
+          v-if="dark"
+          >
+            Light
+          </v-list-tile-title>
+          <v-list-tile-title
+          :class="[themecolor+'--text',shade2Text]"
+          v-else
+          >
+            Dark
+          </v-list-tile-title>
         </v-list-tile>
-      </v-list>
-
-
- <v-list dense>
-          <v-list-group>
-             <v-list-tile  slot="activator">
-             <v-list-tile-action>
-            <v-avatar tile size="40%">
-          <simple-svg
-                  
-                  :filepath="'/static/icons/theme.svg'"
-                  :fill="svgColorLight"
-                  :stroke="svgColorLight"
-                  :width="'32px'"
-                  :height="'32px'"
-                  :id="'custom-id'"
-                  @ready=""
-                  />
-        </v-avatar> 
+        <v-list-tile
+        :class="[themecolor+'--text',shade2Text]"
+        :key="color"
+        v-for="color in colors"
+        @click="changeTheme(color)"
+        >
+          <v-list-tile-action>
+            <v-avatar size="20px" :color="color" />
           </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title :class="textColorLight">Theme</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile @click="toggleDark()">
-              <v-list-tile-action>
-                <v-avatar v-if="dark" size="20px" color="white"></v-avatar>
-                <v-avatar v-else size="20px" color="black"></v-avatar>
-              </v-list-tile-action>
-                <v-list-tile-title :class="textColorLight" v-if="dark">Light</v-list-tile-title>
-                <v-list-tile-title :class="textColorLight" v-else>Dark</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile :class="textColorLight" v-for="color in colors"
-            v-bind:key="color"
-            @click="changeTheme(color)">
-              <v-list-tile-action>
-                <v-avatar size="20px" :color="color"></v-avatar>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>{{color}}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list-group>
-        </v-list>
-
-  
-    </v-navigation-drawer>
+          <v-list-tile-content>
+            <v-list-tile-title>{{color}}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
 import colorSet from 'vuetify/es5/util/colors'
+import {bus} from '../main'
+import theme from '../mixins/theme'
 
   export default {
       props: ['drawer'],
     data () {
       return {
+        drawerState: true,
         colorSet: colorSet,
         themecolor: 'blue-grey',
         interval: {},
@@ -146,32 +140,20 @@ import colorSet from 'vuetify/es5/util/colors'
         
       }
     },
-    computed: {
-      textColorLight: function(){
-        return this.themecolor+"--text text--lighten-4"
-      },
-      textColorDark: function(){
-        return this.themecolor+"--text text--darken-4"
-      },
-      svgColorLight: function(){
-        return eval('this.colorSet.'+this.camelCase+".lighten4")
-      },
-      svgColorDark: function(){
-        return eval('this.colorSet.'+this.camelCase+".darken4")
-      },
-      camelCase: function() {
-            return this._.camelCase(this.themecolor)
-        }
-    },
+    mixins: [theme],
+    
     methods: {
       changeTheme: function(color) {
         this.$emit('changeTheme',color);
         this.themecolor = color;
       },
       toggleDark: function() {
-        this.$emit('toggleDark');
+        bus.$emit('toggleDark');
         this.dark = !this.dark;
       }
+    },
+    created () {
+      bus.$on('toggleDrawer',()=>{this.drawerState = !this.drawerState})
     },
     beforeDestroy () {
       clearInterval(this.interval)

@@ -1,62 +1,50 @@
 <template>
   <v-app :dark="dark">
+
+    <navbar
+    :themecolor="themecolor"
+    />
+
     <drawer
     v-on:changeTheme="changeTheme"
     v-on:toggleDark="toggleDark" 
-    v-bind:drawer="drawer" />
+    />
 
-    <navbar
-    v-on:toggleDrawer="toggleDrawer"
-    :themecolor="themecolor" />
-
-   <v-content 
-   :class="themecolor"
-   class="darken-4">
+   <v-content >
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
-      <router-view :themecolor="themecolor" />
+          <router-view :themecolor="themecolor" />
         </v-layout>
       </v-container>
     </v-content>
-
-  <v-footer app :color="themecolor" class="elevation-24" dark></v-footer>
+    <encounter-bar
+    :themecolor="themecolor"
+     />
+  <v-footer
+  :color="themecolor"
+  app
+  class="elevation-24"
+  light
+  />
   </v-app>
 </template>
 
 <script>
-import colorSet from 'vuetify/es5/util/colors'
+import {bus} from './main'
+import theme from './mixins/theme'
+
 
   export default {
     data () {
       return {
-        colorSet: colorSet,
         themecolor: 'blue-grey',
-        drawer: null,
-        interval: {},
         dark: true,
-        value: 0,
-        
-        
       }
     },
-    computed: {
-      textColorLight: function(){
-        return this.themecolor+"--text text--lighten-4"
-      },
-      textColorDark: function(){
-        return this.themecolor+"--text text--darken-4"
-      },
-      svgColor: function(){
-        return eval('this.colorSet.'+this.camelCase+".darken4")
-      },
-      camelCase: function() {
-            return this._.camelCase(this.themecolor)
-        }
+    created () {
+    bus.$on('toggleDark',()=>{this.dark = !this.dark})
     },
     methods: {
-      toggleDrawer() {
-        this.drawer = !this.drawer;
-      },
       toggleDark: function() {
         this.dark = !this.dark;
       },
@@ -65,17 +53,7 @@ import colorSet from 'vuetify/es5/util/colors'
 
       }
     },
-    beforeDestroy () {
-      clearInterval(this.interval)
-    },
-    mounted () {
-      this.interval = setInterval(() => {
-        if (this.value === 0) {
-          return (this.value = 100)
-        }
-        this.value -= 10
-      }, 1000)
-    },
+    mixins: [theme]
   }
 </script>
 
@@ -89,22 +67,16 @@ import colorSet from 'vuetify/es5/util/colors'
 	background: rgba(0, 0, 0, .1);;
 	color:white;
 }
-
-
-
 .fade-enter-active, .fade-leave-active {
   transition-property: opacity;
   transition-duration: .25s;
 }
-
 .fade-enter-active {
   transition-delay: .25s;
 }
-
 .fade-enter, .fade-leave-active {
   opacity: 0
 }
-
 #inputcell {
   padding: 0%;
 }
@@ -147,6 +119,9 @@ input:hover {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: rgba(255, 255, 255, .5);
+}
+.input-group--text-field {
+  color: blueviolet;
 }
 </style>
 

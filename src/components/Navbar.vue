@@ -1,168 +1,187 @@
 <template>
   <v-toolbar
     :color="themecolor"
-    dark
-    prominent
-    fixed
-    clipped-left
+    :class="shade2"
     app
-    extended>
-      <v-toolbar-side-icon @click.stop="toggleDrawer"></v-toolbar-side-icon>
+    clipped-left
+    clipped-right
+    extended
+    fixed
+    prominent
+    >
+      <!-- <v-toolbar-side-icon @click.stop="toggleDrawer"></v-toolbar-side-icon> -->
       <v-container  fill-height class="pa-0" grid-list-md fluid v-bind="{ [`grid-list-sm`]: true }">
-        <v-layout mr-2 mt-3>
+        <v-layout mx-2 mt-3>
           <v-avatar size="92px">
               <img src="/static/avatar.png" />
             </v-avatar>
         </v-layout>    
-        <v-layout v-resize="onResize" row wrap justify-space-between>
+        <v-layout class="px-2" v-resize="onResize" row wrap justify-space-between>
           <v-flex sm9 md3>
               <v-text-field
-              class="display-1 text--lighten-4"
+              v-on:blur="testfunc"
+              class="display-1"
               name="charName"
               label="Character Name"
               id="charName"
+              :light="!dark"
               :color="themecolor"
-              :value="characterData[0].characterName"
+              :class="[themecolor+'--text',shade5Text]"
+              
               hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>600" sm3 md2>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="alignment"
             label="Alignment"
             id="alignment"
-            :value="characterData[0].alignment"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>960" md2 lg1>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="deity"
             label="Deity"
             id="deity"
-            :value="characterData[0].deity"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>960" md2>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="homeland"
             label="Homeland"
             id="homeland"
-            :value="characterData[0].homeland"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>960" md2 lg1>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="gender"
             label="Gender"
             id="gender"
-            :value="characterData[0].gender"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>960" md1>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="age"
             label="Age"
             id="age"
-            :value="characterData[0].age"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>1264" xs1>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="Hair"
             label="Hair"
             id="hair"
-            :value="characterData[0].hair"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>1264" xs1>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="eyes"
             label="Eyes"
             id="eyes"
-            :value="characterData[0].eyes"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex xs2 md1 >
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="level"
             label="Level"
             id="level"
-            :value="characterData[0].level"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex xs5 md3 lg2 >
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="race"
             label="Race"
             id="race"
-            :value="characterData[0].race"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex xs5 md3 lg2>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="class"
             label="Class"
             id="class"
-            :value="characterData[0].class"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>960" md3 lg2 >
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="playerName"
             label="Player Name"
             id="playerName"
-            :value="characterData[0].playerName"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>960" md1 >
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="size"
             label="Size"
             id="size"
-            :value="characterData[0].size"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>1264" xs1 >
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="height"
             label="Height"
             id="height"
-            :value="characterData[0].height"
+            :light="!dark"
             hide-details />
           </v-flex>
           <v-flex v-if="windowSize.x>1264" xs1>
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
+            :class="[themecolor+'--text',shade5Text]"
             name="weight"
             label="Weight"
             id="weight"
-            :value="characterData[0].weight"
+            :light="!dark"
             hide-details />
           </v-flex>
         </v-layout>
@@ -172,8 +191,6 @@
     </v-btn>
     </v-flex>
       </v-container>
-    
-
     </v-toolbar>
 </template>
 
@@ -181,11 +198,14 @@
 <script>
 import colorSet from 'vuetify/es5/util/colors'
 import db from './firebaseInit'
+import {bus} from '../main'
+import theme from '../mixins/theme'
 
   export default {
     props: ['themecolor'],
     data () {
       return {
+        testval: 'resr',
         characterData: [],
         windowSize: {
           x: 0,
@@ -234,6 +254,13 @@ import db from './firebaseInit'
       }
     },
     created () {
+      bus.$on('toggleDark',()=>{this.dark = !this.dark})
+      // console.log(this);
+      // db.collection("characters").doc("6CParka0uOfCAiwqmvIK")
+      //   .onSnapshot(function(doc) {
+      //       console.log("Current data: ", doc && doc.data());
+      //   });
+
       db.collection('characters').get().then
       (querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -256,28 +283,26 @@ import db from './firebaseInit'
             'size': doc.data().size,
             'weight': doc.data().weight,
           }
+          
           this.characterData.push(data)
         })
       })
     },
-    computed: {
-      textColorLight: function(){
-        return this.themecolor+"--text text--lighten-4"
-      },
-      textColorDark: function(){
-        return this.themecolor+"--text text--darken-4"
-      },
-      svgColor: function(){
-        return eval('this.colorSet.'+this.camelCase+".darken4")
-      },
-      camelCase: function() {
-            return this._.camelCase(this.themecolor)
-        }
-    },
+    mixins:[theme],
+  
     methods: {
+      testfunc() {
+        // console.log(this.characterData[0].characterName)
+        db.collection("characters").doc("6CParka0uOfCAiwqmvIK").update({
+            "characterName": this.characterData[0].characterName,
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        });
+      },
       toggleDrawer() {
         // console.log(this.characterData[0].firebaseId)
-         this.$emit('toggleDrawer')
+         bus.$emit('toggleDrawer')
       },
       changeTheme: function(color) {
         this.themecolor = color;
