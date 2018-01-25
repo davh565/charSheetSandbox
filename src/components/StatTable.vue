@@ -3,40 +3,78 @@
         v-bind:headers="headers"
         :items="items"
         hide-actions
-        dark
         class="elevation-1"
       >
       <template slot="headers" slot-scope="props">
         <th v-for="header in props.headers" 
-            :key="header.text" 
-            :class="themecolor"
-            class="subheading white--text">
-            {{header.text}}
+            :key="header.text"
+            :class="[themecolor, themecolor+'--text',shade3,shade5Text]"
+            class="px-1 subheading">
+          <span v-html="header.text"></span>
         </th>
       </template>
+
       <template slot="items" slot-scope="props">
-        <td :class="themecolor"
-            class="lighten-2 body-2 white--text">
-            <v-avatar tile size="40%">
-                <img :src="props.item.avatar" />
-            </v-avatar>
-            {{ props.item.name }}
+        <td
+        :class="[ themecolor+'--text',shade5,shade4Text]"
+        class=" px-3 body-2  text-xs-center text-sm-left">
+            <v-tooltip bottom class="hidden-sm-and-up">
+              <span slot="activator">
+                <v-avatar tile class="px-2">
+                  <simple-svg
+                  :filepath="props.item.avatar"
+                  :fill="svgShade"
+                  :stroke="svgShade"
+                  :width="'32px'"
+                  :height="'32px'"
+                  :id="'custom-id'"
+                  @ready=""
+                  />
+                </v-avatar>
+              </span>
+                <span>{{ props.item.name }}</span>
+            </v-tooltip>
+              <span class="hidden-xs-only">
+                <v-avatar tile class="px-2">
+                  <simple-svg
+                  :filepath="props.item.avatar"
+                  :fill="svgShade"
+                  :stroke="svgShade"
+                  :width="'32px'"
+                  :height="'32px'"
+                  :id="'custom-id'"
+                  @ready=""
+                  />
+                </v-avatar>
+                <span :class="[themecolor+'--text',shade5,shade4Text]" class="px-2">{{ props.item.name }}</span>
+              </span>
         </td>
-        <td :class="themecolor + ' ' + themeText"
-            class="headline accent-4 text--lighten-4 text-xs-center">{{ props.item.bonus }}</td>
-        <td :class="themecolor + ' ' + themeText"
-            class="lighten-3 text--darken-2 text-xs-center">{{ props.item.total }}</td>
+
+        <td 
+        :class="[themecolor, themecolor+'--text',shade5,shade5Text]"
+        class="px-0  title text-xs-center">
+          {{ props.item.bonus }}
+        </td>
+        <td
+        class="px-0 body-2 text-xs-center" 
+        :class="[themecolor+'--text',shade5,shade4Text]"
+        >
+          {{ props.item.total }}
+        </td>
         <!-- <td class="text-xs-center">{{ props.item.base }}</td> -->
-        <td :class="themecolor + ' ' + themeText" 
-            class="lighten-4  text--darken-2 text-xs-center"
-            id="inputcell">
-            <input size="2" 
-                   v-bind:value="props.item.base"/>
+        <td
+        class="px-0 body-2 text-xs-center" 
+        :class="[themecolor+'--text',shade5,shade4Text]"
+        >
+          <input
+          size="2" 
+          v-bind:value="props.item.base"/>
         </td>
-        <td :class="themecolor + ' ' + themeText"
-            class="lighten-4 text--darken-2 text-xs-center"
-            id="inputcell">
-            <input size="2" v-bind:value="props.item.misc" />
+        <td 
+        class="px-0 body-2 text-xs-center" 
+        :class="[themecolor+'--text',shade5,shade4Text]"
+        >
+          <input size="2" v-bind:value="props.item.misc" />
         </td>
         <!-- <td class="text-xs-center">{{ props.item.misc }}</td> -->
       </template>
@@ -44,11 +82,19 @@
 </template>
 
 <script>
+import colorSet from 'vuetify/es5/util/colors'
 import theme from '../mixins/theme'
+import {bus} from '../main'
   export default {
     props: ['themecolor'],
+    mixins:[theme],
+    created () {
+      bus.$on('toggleDark',()=>{this.dark = !this.dark})
+     },
     data () {
       return {
+        dark: true,
+        colorSet: colorSet,
         headers: [
           {
             text: 'Stats',

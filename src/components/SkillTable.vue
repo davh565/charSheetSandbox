@@ -9,14 +9,15 @@
       <template slot="headers" slot-scope="props">
         <th v-for="header in props.headers" 
             :key="header.text"
-            :class="[themecolor, themecolor+'--text',shade4,shade5Text]"
+            :class="[themecolor, themecolor+'--text',shade3,shade5Text]"
             class="px-1 subheading">
           <span v-html="header.text"></span>
         </th>
       </template>
+
       <template slot="items" slot-scope="props">
         <td
-        :class="[themecolor, themecolor+'--text',shade5,shade5Text]"
+        :class="[ themecolor+'--text',shade5,shade4Text]"
         class=" px-3 body-2  text-xs-center text-sm-left">
             <v-tooltip bottom class="hidden-sm-and-up">
               <span slot="activator">
@@ -46,20 +47,20 @@
                   @ready=""
                   />
                 </v-avatar>
-                <span :class="[themecolor+'--text',shade3,shade5Text]" class="px-2">{{ props.item.name }}</span>
+                <span :class="[themecolor+'--text',shade5,shade4Text]" class="px-2">{{ props.item.name }}</span>
               </span>
         </td>
         <td 
-        :class="[themecolor, themecolor+'--text',shade3,shade5Text]"
+        :class="[themecolor, themecolor+'--text',shade5,shade5Text]"
         class="px-0  title text-xs-center">
-        {{ props.item.total }}
+          {{ props.item.total }}
         </td>
-        <td class="px-0 body-2 text-xs-center" :class="[themecolor, themecolor+'--text',shade5,shade5Text]"><input size="2" v-bind:value="props.item.statBonus" /> </td>
-        <td class="px-0 body-2 text-xs-center" :class="[themecolor, themecolor+'--text',shade5,shade5Text]"><input size="2" v-bind:value="props.item.rank" /> </td>
-        <td class="px-0 body-2 text-xs-center" :class="[themecolor, themecolor+'--text',shade5,shade5Text]">{{ props.item.classBonus }}</td>
-        <td class="px-0 body-2 text-xs-center" :class="[themecolor, themecolor+'--text',shade5,shade5Text]">{{ props.item.classSkill }}</td>
-        <td class="px-0 body-2 text-xs-center" :class="[themecolor, themecolor+'--text',shade5,shade5Text]">{{ props.item.misc }}</td>
-        <td class="px-0 body-2 text-xs-center" :class="[themecolor, themecolor+'--text',shade5,shade5Text]"><input size="2" v-bind:value="props.item.statType" /> </td>
+        <td class="px-0 body-2 text-xs-center" :class="[themecolor+'--text',shade5,shade4Text]"><input size="2" v-bind:value="props.item.statBonus" /> </td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]"><input size="2" v-bind:value="props.item.rank" /> </td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]">{{ props.item.classBonus }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]">{{ props.item.classSkill }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]">{{ props.item.misc }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]"><input size="2" v-bind:value="props.item.statType" /> </td>
       </template>
     </v-data-table>
 </template>

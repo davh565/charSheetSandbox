@@ -11,14 +11,29 @@
     />
 
    <v-content >
-      <v-container fluid fill-height>
+      <v-container :class="[themecolor,shade1]" fluid fill-height>
         <v-layout justify-center align-center>
           <router-view :themecolor="themecolor" />
         </v-layout>
       </v-container>
     </v-content>
+    <v-btn
+            :color="themecolor"
+            class="mb-4"
+            dark
+            fab
+            hover
+            bottom
+            fixed
+            right
+            
+            @click="encounterBar = !encounterBar"
+        >
+        <span class="display-1">&#9876;</span>
+        </v-btn>
     <encounter-bar
     :themecolor="themecolor"
+    :encounterBar="encounterBar"
      />
   <v-footer
   :color="themecolor"
@@ -37,6 +52,7 @@ import theme from './mixins/theme'
   export default {
     data () {
       return {
+        encounterBar: null,
         themecolor: 'blue-grey',
         dark: true,
       }
@@ -63,6 +79,7 @@ import theme from './mixins/theme'
   font-weight: 600;
   
 }
+
 ::selection{
 	background: rgba(0, 0, 0, .1);;
 	color:white;
@@ -103,23 +120,7 @@ input:hover {
   text-align: left;
 }
 
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	/* background-color: #F5F5F5; */
-}
-::-webkit-scrollbar
-{
-	width: 12px;
-	background-color: rgba(255, 255, 255, .2);
-}
-::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: rgba(255, 255, 255, .5);
-}
+
 .input-group--text-field {
   color: blueviolet;
 }

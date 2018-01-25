@@ -11,8 +11,10 @@
   >
     <template slot="headers" slot-scope="props">
       <tr>
-        <th>
+        <th :class="[themecolor, themecolor+'--text',shade3,shade5Text]"
+        class="px-1 subheading">
           <v-checkbox
+          
             primary
             hide-details
             @click.native="toggleAll"
@@ -24,7 +26,13 @@
           v-for="header in props.headers"
           :key="header.text"
           :class="['column sortable',
-                    pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '',themecolor]"
+                    pagination.descending ? 'desc' : 'asc',
+                    header.value === pagination.sortBy ? 'active' : '',
+                    themecolor,
+                    themecolor+'--text',
+                    shade3,
+                    shade5Text]"
+          class="px-1 subheading"
           @click="changeSort(header.value)"
         >
           <v-icon small>arrow_upward</v-icon>
@@ -41,25 +49,31 @@
             :input-value="props.selected"
           ></v-checkbox>
         </td>
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right" :class="[shade2]">{{ props.item.enchant }}</td>
-        <td class="text-xs-right">{{ props.item.attack }}</td>
-        <td class="text-xs-right">{{ props.item.damage }}</td>
-        <td class="text-xs-right">{{ props.item.critical }}</td>
-        <td class="text-xs-right">{{ props.item.range }}</td>
-        <td class="text-xs-right">{{ props.item.type }}</td>
-        <td class="text-xs-right">{{ props.item.special}}</td>
+        <td :class="[themecolor+'--text',shade5,shade4Text]" class="px-2">{{ props.item.name }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[themecolor+'--text',shade5,shade4Text]">{{ props.item.enchant }}</td>
+        <td :class="[themecolor, themecolor+'--text',shade5,shade5Text]"
+        class="px-0  title text-xs-center">{{ props.item.attack }}</td>
+        <td :class="[themecolor, themecolor+'--text',shade4,shade5Text]"
+        class="px-0  subheading text-xs-center">{{ props.item.damage }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]">{{ props.item.critical }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]">{{ props.item.range }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]">{{ props.item.type }}</td>
+        <td class="px-0 body-2 text-xs-center" :class="[ themecolor+'--text',shade5,shade4Text]">{{ props.item.special}}</td>
       </tr>
     </template>
   </v-data-table>
 </template>
 <script>
-import {bus} from '../main'
+import colorSet from 'vuetify/es5/util/colors'
 import theme from '../mixins/theme'
+import {bus} from '../main'
+  export default {
+    props: ['themecolor'],
 
-export default {
-        mixins:[theme],
-        props: ['themecolor'],
+    mixins:[theme],
+     created () {
+      bus.$on('toggleDark',()=>{this.dark = !this.dark})
+     },
   data () {
       return {
         dark: true,
@@ -124,6 +138,54 @@ export default {
             value: false,
             avatar: '/static/icons/acrobatics.svg',
             name: 'Devilish Dagger',
+            enchant: '+4',
+            attack: '+9',
+            damage: '1d4+5',
+            critical: '19-20 / x2',
+            range: '10 ft',
+            type: 'P or S',
+            special: 'light',
+          },
+                   {
+            value: false,
+            avatar: '/static/icons/acrobatics.svg',
+            name: 'Holy Hand Grenade of Antioch',
+            enchant: '+4',
+            attack: '+9',
+            damage: '1d4+5',
+            critical: '19-20 / x2',
+            range: '10 ft',
+            type: 'P or S',
+            special: 'light',
+          },
+                   {
+            value: false,
+            avatar: '/static/icons/acrobatics.svg',
+            name: 'ShortSword',
+            enchant: '+4',
+            attack: '+9',
+            damage: '1d4+5',
+            critical: '19-20 / x2',
+            range: '10 ft',
+            type: 'P or S',
+            special: 'light',
+          },
+                   {
+            value: false,
+            avatar: '/static/icons/acrobatics.svg',
+            name: 'Throwing Knife',
+            enchant: '+4',
+            attack: '+9',
+            damage: '1d4+5',
+            critical: '19-20 / x2',
+            range: '10 ft',
+            type: 'P or S',
+            special: 'light',
+          },
+                   {
+            value: false,
+            avatar: '/static/icons/acrobatics.svg',
+            name: 'Throwing Knife',
             enchant: '+4',
             attack: '+9',
             damage: '1d4+5',
