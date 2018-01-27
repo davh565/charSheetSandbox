@@ -43,7 +43,7 @@
     </v-list-tile>
   </v-list>
 
-  <v-list dense>
+  <!-- <v-list dense>
       <v-list-group
       prepend-icon="palette"
       >
@@ -84,7 +84,8 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list-group>
-    </v-list>
+    </v-list> -->
+    
   </v-navigation-drawer>
 </template>
 

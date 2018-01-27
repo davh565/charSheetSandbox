@@ -16,19 +16,19 @@ export default {
       return !this.dark ? "text--darken-4" : "text--lighten-5"
     },
     shade1() {
-      return this.dark ? "" : "text--lighten-1"
+      return this.dark ? "" : ""
     },
     shade2() {
-      return this.dark ? "darken-1" : "lighten-2"
+      return this.dark ? "darken-1" : "lighten-1"
     },
     shade3() {
-      return this.dark ? "darken-2" : "lighten-3"
+      return this.dark ? "darken-2" : "lighten-2"
     },
     shade4() {
-      return this.dark ? "darken-3" : "lighten-4"
+      return this.dark ? "darken-3" : "lighten-3"
     },
     shade5() {
-      return this.dark ? "darken-4" : "lighten-5"
+      return this.dark ? "darken-4" : "lighten-4"
     },
     textColorLight: function(){
       return this.themecolor+"--text text--lighten-4"
