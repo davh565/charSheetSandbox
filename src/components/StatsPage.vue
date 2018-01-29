@@ -3,7 +3,9 @@
     <v-container fluid grid-list-md>
         <v-layout row wrap>
         <v-flex xs12 lg6>
-            <stat-table :themecolor="themecolor" />
+            <stat-table :themecolor="themecolor">
+                <span slot="title" >Stats</span>
+                </stat-table>
         </v-flex>
         <v-flex xs12 lg6>
             <saves-table :themecolor="themecolor" />

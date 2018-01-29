@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import StatsPage from '@/components/PageStats'
+import PageStats from '@/components/PageStats'
 import SkillsPage from '@/components/SkillsPage'
 import ItemsPage from '@/components/ItemsPage'
 import SpellsPage from '@/components/SpellsPage'
@@ -12,7 +12,7 @@ export default new Router({
     {
       path: '/stats',
       name: 'PageStats',
-      component: StatsPage
+      component: PageStats
     },
     {
       path: '/skills',

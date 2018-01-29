@@ -1,110 +1,86 @@
 <template>
     <v-card>
-        <v-dialog
-        v-model="dialog"
-        max-width="650"
-      >
-      <v-card class="ma-2">
-      <table-stats-full :themecolor="themecolor" />
-           </v-card>
-        </v-dialog>
         <v-toolbar dense
-         :class="[themecolor, themecolor+'--text',shade3,shade5Text]"
-         class="py-1">
-            <!-- <v-toolbar-title > -->
-                <v-btn  flat block large
-                
-                 v-on:click.stop="dialog=true">
-                    Stats
-                    </v-btn>
-                <!-- </v-toolbar-title> -->
+        class="py-1"
+        :class="[themecolor, themecolor+'--text',shade3,shade5Text]" >
+            <v-btn flat block large 
+            v-on:click.stop="dialog=true">
+               {{title}}
+            </v-btn>
         </v-toolbar>
-        <v-list two-line>
-            <template
-             v-for="(stat, index) in stats"
-            >
+        <v-list two-line fluid
+        style="max-height: 830px"
+        class="scroll-y"
+      
             
-
-            <v-list-tile
-             :key="stat.name"
-             avatar action
-             v-on:mouseover="stat.value=true"
-             v-on:mouseleave="stat.value=false"
-             >
-                <v-list-tile-avatar>
-                  <simple-svg
-            :filepath="stat.avatar"
-            :fill="svgShade"
-            :height="'32px'"
-            :id="'custom-id'"
-            :stroke="svgShade"
-            :width="'32px'"
-            @ready=""
-            />
-                </v-list-tile-avatar>
-                <v-list-tile-title :class="[themeText,shade4Text]" >
-                    {{stat.name}}
-                </v-list-tile-title>
-                <v-list-tile-action>
-                    <v-badge
-                    v-model="stat.value" 
-                    top 
-                    right
-                    overlap
-                    class="mb-2"
-                    >
-                        <span slot="badge">
-                            <v-btn
-                             icon 
-                             small
-                             :color="themecolor+' accent-1'"
-                             v-on:click="stat.total++">
-                                <v-icon>add</v-icon>
-                            </v-btn>
-                        </span>
-                    <v-badge 
-                    v-model="stat.value" 
-                    bottom 
-                    right
-                    overlap
+        >
+            <template v-for="(item, index) in items" >
+                <v-list-tile avatar action
+                :key="item.name"
+                v-on:mouseover="item.value=true"
+                v-on:mouseleave="item.value=false" >
+                    <v-list-tile-action class="mx-2" >
+                        <!-- <v-btn
+                        fab
+                        >
+                            <object type="image/svg+xml" :data="item.avatar" width="48" height="48" style="fill:red" />
+                        </v-btn> -->
+                        
+                       <v-avatar :class="[themecolor,shade2]" size="56px" >
+                            <simple-svg
+                            class="mt-2"
+                        :filepath="item.avatar"
+                        :fill="svgShade"
+                        :height="'32px'"
+                        :stroke="svgShade"
+                        :width="'32px'"
+                        @ready=""
+                         />
+                       </v-avatar>
+                    </v-list-tile-action>
+                    <v-list-tile-title :class="[themeText,shade4Text]" >
+                        {{item.name}}
+                    </v-list-tile-title>
+                    <v-list-tile-action>
+                        <v-badge top right overlap
+                        v-model="item.value" 
+                        class="" >
+                            <span slot="badge">
+                                <v-btn icon small
+                                :color="themecolor+' accent-1'"
+                                v-on:click="item.total++">
+                                    <v-icon>add</v-icon>
+                                </v-btn>
+                            </span>
+                    <v-badge bottom right overlap
+                    v-model="item.value" 
                     :color="themecolor+' accent-1'">
                         <span slot="badge">
-                            <v-btn
-                             icon 
-                             small
+                            <v-btn icon small
                              :color="themecolor+' accent-1'"
-                             v-on:click="stat.total--">
+                             v-on:click="item.total--">
                                 <v-icon>remove</v-icon>
                             </v-btn>
                         </span>
-                    <v-badge
-                    
-                    bottom 
-                    left 
-                    overlap
-                     
-                    :color="themecolor+' '+shade1">
-                        <span slot="badge" class="subheading">
-                            <v-btn
-                          icon 
-                          fab
-                             small
-                             :color="themecolor+' '"
-                             v-on:click="">
-                         {{stat.bonus}}
+                    <v-badge bottom left overlap
+                    color="none"
+                    class="">
+                        <span slot="badge" >
+                            <v-btn icon 
+                            class="subheading mb-2"
+                            v-if="item.bonus"
+                            :color="themecolor+''"
+                            v-on:click="">
+                         {{item.bonus}}
                         </v-btn>
                          </span>
                         
-                        <v-btn
-                         :class="[themecolor, shade5,
-                                  themecolor+'--text',shade4Text]"
-                         class="title"
-                         fab
-                         flat
-                         
-                         
+                        <v-btn fab flat 
+                        class="title"
+                        :class="[themecolor, shade5, themecolor+'--text',
+                                 shade4Text]"
                          >
-                            {{stat.total}}
+                            {{item.total}}
                         </v-btn>
                     </v-badge>
                     </v-badge>
@@ -112,13 +88,17 @@
                 </v-list-tile-action>
                 <v-list-tile-content>
                 </v-list-tile-content>
-                
-                <!-- <v-list-tile-action>
-                </v-list-tile-action> -->
             </v-list-tile>
-            <v-divider v-if="index<stats.length-1" />
+            <v-divider  v-if="index<items.length-1" />
             </template>
         </v-list>
+
+        <v-dialog v-model="dialog" max-width="650" >
+            <v-card class="ma-2" >
+                <slot />
+            </v-card>
+        </v-dialog>
+
     </v-card>
 </template>
     
@@ -128,7 +108,7 @@ import colorSet from 'vuetify/es5/util/colors'
 import theme from '../mixins/theme'
 import {bus} from '../main'
   export default {
-    props: ['themecolor'],
+    props: ['themecolor','title','items'],
     mixins:[theme],
     created () {
       bus.$on('toggleDark',()=>{this.dark = !this.dark})
@@ -138,75 +118,7 @@ import {bus} from '../main'
           dialog: false,
         dark: true,
         colorSet: colorSet,
-        headers: [
-          {
-            text: 'Stats',
-            align: 'left',
-            sortable: false,
-            color: 'primary',
-            value: 'name'
-          },
-          { text: 'Bonus', sortable: false, value: 'bonus' },
-          { text: 'Total', sortable: false, value: 'total' },
-          { text: 'Base', sortable: false, value: 'base' },
-          { text: 'Misc', sortable: false, value: 'misc' },
-        ],
-        stats: [
-          {
-            value: false,
-            name: 'Strength',
-            avatar: '/static/icons/str.svg',
-            bonus: '+4',
-            total: 18,
-            base: 10,
-            misc: 0
-          },
-          {
-            value: false,
-            avatar: '/static/icons/dex.svg',
-            name: 'Dexterity',
-            bonus: '+2',
-            total: 13,
-            base: 10,
-            misc: 0
-          },
-          {
-            value: false,
-            avatar: '/static/icons/cons.svg',
-            name: 'Constitution',
-            bonus: '+3',
-            total: 16,
-            base: 10,
-            misc: 0
-          },
-          {
-            value: false,
-            avatar: '/static/icons/int.svg',
-            name: 'Intelligence',
-            bonus: '-1',
-            total: 9,
-            base: 10,
-            misc: 0
-          },
-          {
-            value: false,
-            avatar: '/static/icons/wis.svg',
-            name: 'Wisdom',
-            bonus: '+0',
-            total: 10,
-            base: 10,
-            misc: 0
-          },
-          {
-            value: false,
-            avatar: '/static/icons/cha.svg',
-            name: 'Charisma',
-            bonus: '+0',
-            total: 10,
-            base: 10,
-            misc: 0
-          }
-        ]
+        
       }
     },
     computed: {
@@ -216,17 +128,15 @@ import {bus} from '../main'
     },
     mixins:[theme],
     methods: {
-        mouseOver(stat) {
-            stat.value=!stat.value
+        mouseOver(item) {
+            item.value=!item.value
         }
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-tr>* {
-  font-variant: small-caps;
-}
+<style >
+
 </style>
 

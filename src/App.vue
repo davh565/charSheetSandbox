@@ -11,13 +11,13 @@
     />
 
    <v-content >
-      <v-container :class="[themecolor,shade1]" fluid fill-height>
+      <v-container :class="[themecolor+' lighten-2']" fluid fill-height>
         <v-layout justify-center align-center>
           <router-view :themecolor="themecolor" />
         </v-layout>
       </v-container>
     </v-content>
-    <v-btn
+    <!-- <v-btn
             :color="themecolor"
             class="mb-4"
             dark
@@ -28,13 +28,13 @@
             right
             
             @click="encounterBar = !encounterBar"
-        >
+        > -->
         <span class="display-1">&#9876;</span>
         </v-btn>
-    <encounter-bar
+    <!-- <encounter-bar
     :themecolor="themecolor"
     :encounterBar="encounterBar"
-     />
+     /> -->
   <v-footer
   :color="themecolor"
   app

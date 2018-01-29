@@ -89,32 +89,7 @@ import {bus} from '../main'
           { text: 'Base', sortable: false, value: 'base' },
           { text: 'Misc', sortable: false, value: 'misc' },
         ],
-        items: [
-          {
-            value: false,
-            avatar: '/static/icons/fort.svg',
-            name: 'Fortitude',
-            total: 4,
-            base: 4,
-            misc: 0
-          },
-          {
-            value: false,
-            avatar: '/static/icons/ref.svg',
-            name: 'Reflex',
-            total: 2,
-            base: 3,
-            misc: -1
-          },
-          {
-            value: false,
-            avatar: '/static/icons/will.svg',
-            name: 'Will',
-            total: 2,
-            base: 2,
-            misc: 0
-          }
-        ]
+        
       }
     }
   }
