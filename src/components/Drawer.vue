@@ -116,15 +116,15 @@ import theme from '../mixins/theme'
                 route: 'stats',
                 avatar: '/static/icons/stats2.svg',
               },
-              {
-                name: 'Skills',
-                route: 'skills',
-                avatar: '/static/icons/skills.svg',
+              // {
+              //   name: 'Skills',
+              //   route: 'skills',
+              //   avatar: '/static/icons/skills.svg',
 
-              },
+              // },
               {
                 name: 'Abilities',
-                route: 'abilites',
+                route: 'abilities',
                 avatar: '/static/icons/abilities.svg',
               },
               {

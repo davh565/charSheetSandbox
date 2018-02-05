@@ -1,7 +1,7 @@
 <template>
   <v-toolbar
     :color="themecolor"
-    :class="shade2"
+    :class="shade3"
     app
     clipped-left
     clipped-right

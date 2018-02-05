@@ -10,7 +10,7 @@
     v-on:toggleDark="toggleDark" 
     />
 
-   <v-content >
+   <v-content class="scroll-y">
       <v-container :class="[themecolor+' lighten-2']" fluid fill-height>
         <v-layout justify-center align-center>
           <router-view :themecolor="themecolor" />
@@ -123,6 +123,26 @@ input:hover {
 
 .input-group--text-field {
   color: blueviolet;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #263238; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #607D8B; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #455A64; 
 }
 </style>
 

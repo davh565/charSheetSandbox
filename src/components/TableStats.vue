@@ -8,8 +8,8 @@
                {{title}}
             </v-btn>
         </v-toolbar>
-        <v-list two-line fluid
-        style="max-height: 830px"
+        <v-list  fluid
+        style="max-height: 357px"
         class="scroll-y"
       
             
@@ -26,7 +26,7 @@
                             <object type="image/svg+xml" :data="item.avatar" width="48" height="48" style="fill:red" />
                         </v-btn> -->
                         
-                       <v-avatar :class="[themecolor,shade2]" size="56px" >
+                       <v-avatar :class="[themecolor,shade2]" size="48px" >
                             <simple-svg
                             class="mt-2"
                         :filepath="item.avatar"
@@ -41,6 +41,11 @@
                     <v-list-tile-title :class="[themeText,shade4Text]" >
                         {{item.name}}
                     </v-list-tile-title>
+                    <v-list-tile-action v-if="item.bonus">
+                        <v-avatar :class="themecolor" size="36px" >
+                            {{item.bonus}}
+                        </v-avatar> 
+                    </v-list-tile-action>
                     <v-list-tile-action>
                         <v-badge top right overlap
                         v-model="item.value" 
@@ -62,27 +67,15 @@
                                 <v-icon>remove</v-icon>
                             </v-btn>
                         </span>
-                    <v-badge bottom left overlap
-                    color="none"
-                    class="">
-                        <span slot="badge" >
-                            <v-btn icon 
-                            class="subheading mb-2"
-                            v-if="item.bonus"
-                            :color="themecolor+''"
-                            v-on:click="">
-                         {{item.bonus}}
-                        </v-btn>
-                         </span>
+                    
                         
-                        <v-btn fab flat 
-                        class="title"
-                        :class="[themecolor, shade5, themecolor+'--text',
-                                 shade4Text]"
-                         >
+                        <v-avatar
+                        class=""
+                        :class="[themecolor,shade5]"
+                        >
+                        
                             {{item.total}}
-                        </v-btn>
-                    </v-badge>
+                        </v-avatar>
                     </v-badge>
                     </v-badge>
                 </v-list-tile-action>
