@@ -1,15 +1,15 @@
 <template>
   <v-app :dark="dark">
 
-    <navbar
-    :themecolor="themecolor"
-    />
 
     <drawer
     v-on:changeTheme="changeTheme"
     v-on:toggleDark="toggleDark" 
     />
 
+    <navbar
+    :themecolor="themecolor"
+    />
    <v-content class="scroll-y">
       <v-container :class="[themecolor+' lighten-2']" fluid fill-height>
         <v-layout justify-center align-center>
@@ -29,8 +29,6 @@
             
             @click="encounterBar = !encounterBar"
         > -->
-        <span class="display-1">&#9876;</span>
-        </v-btn>
     <!-- <encounter-bar
     :themecolor="themecolor"
     :encounterBar="encounterBar"
@@ -53,7 +51,7 @@ import theme from './mixins/theme'
     data () {
       return {
         encounterBar: null,
-        themecolor: 'blue-grey',
+        themecolor: 'brown',
         dark: true,
       }
     },

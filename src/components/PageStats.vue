@@ -29,7 +29,7 @@
                     <v-flex  md4 lg3  >
                         <table-stats :themecolor="themecolor" 
                         :title="'Saves'" :items="saves" >
-                            <table-saves-full :themecolor="themecolor" />    
+                            <!-- <table-saves-full :themecolor="themecolor" />     -->
                             </table-stats>
                     </v-flex>
                     <v-flex  md4 lg3   >
@@ -47,11 +47,22 @@
 </template>
 
 <script>
+
+import TableStats from './TableStats.vue'
+import TableStatsFull from './TableStatsFull.vue'
+import SkillTable from './SkillTable.vue'
 import colorSet from 'vuetify/es5/util/colors'
 import theme from '../mixins/theme'
 import {bus} from '../main'
   export default {
     props: ['themecolor'],
+    components: {
+      
+      'table-stats': TableStats,
+    'table-stats-full': TableStatsFull,
+    'skill-table': SkillTable,
+
+    },
     mixins:[theme],
     data () {
         return {

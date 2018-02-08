@@ -5,17 +5,26 @@
     app
     clipped-left
     clipped-right
-    extended
+    
     fixed
     prominent
     >
+    
       <!-- <v-toolbar-side-icon @click.stop="toggleDrawer"></v-toolbar-side-icon> -->
       <v-container  fill-height class="pa-0" grid-list-md fluid v-bind="{ [`grid-list-sm`]: true }">
-        <v-layout mx-2 mt-3>
-          <v-avatar size="92px">
+        <!-- <v-flex xs12 mt-4 pt-5>
+             <v-progress-linear indeterminate></v-progress-linear>
+          </v-flex>  -->
+        <v-layout mx-0 mt-0>
+        <v-btn :class="[themecolor,shade1]" mt-0 fab absolute small>  <v-icon>menu</v-icon> </v-btn>
+          <v-avatar :class="[themecolor,shade3]" size="112px">
+            <v-badge left color="purple" overlap>
+          <v-avatar  size="96px">
               <img src="/static/avatar.png" />
             </v-avatar>
-        </v-layout>    
+            </v-badge>
+            </v-avatar>
+        </v-layout>   
         <v-layout class="px-2" v-resize="onResize" row wrap justify-space-between>
           <v-flex sm9 md3>
               <v-text-field
@@ -107,7 +116,8 @@
             :light="!dark"
             hide-details />
           </v-flex>
-          <v-flex xs2 md1 >
+          
+          <!-- <v-flex xs2 md1 >
             <v-text-field
             class="text--lighten-4"
             :color="themecolor"
@@ -183,7 +193,7 @@
             id="weight"
             :light="!dark"
             hide-details />
-          </v-flex>
+          </v-flex> -->
         </v-layout>
     <v-flex xs1 slot="extension" class="hidden-lg-and-up text-xs-right">
       <v-btn icon slot>

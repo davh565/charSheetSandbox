@@ -9,6 +9,9 @@
     permanent
     v-model="drawerState"
   >
+  <v-toolbar prominent   :color="themecolor"
+    :class="shade5" flat>
+  </v-toolbar>
   <v-list dense>
     <v-list-tile
     :key="item.name"
@@ -100,7 +103,7 @@ import theme from '../mixins/theme'
       return {
         drawerState: true,
         colorSet: colorSet,
-        themecolor: 'blue-grey',
+        themecolor: 'brown',
         interval: {},
         dark: true,
         value: 0,
